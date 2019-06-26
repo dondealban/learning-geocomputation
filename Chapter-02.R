@@ -1,14 +1,16 @@
 # Geocomputation with R
 # Chapter 2
 
-# LOAD LIBRARIES -------------------
+# LOAD LIBRARIES -------------------------
+
 library(sf)          # classes and functions for vector data
 library(raster)      # classes and functions for raster data
 library(spData)      # load geographic data
 library(spDataLarge) # load larger geographic data
 
-# EXPLORE VECTOR DATA --------------
-# An introduction to simple features
+# EXPLORE VECTOR DATA --------------------
+
+# AN INTRODUCTION TO SIMPLE FEATURES
 vignette(package="sf") # see which vignettes are available
 vignette("sf1")          # an introduction to the package
 
@@ -113,3 +115,21 @@ st_geometry_type(multilinestring_sfc)
 # sfc geometry
 point_multilinestring_sfc <- st_sfc(point1, multilinestring1)
 st_geometry_type(point_multilinestring_sfc)
+
+# EPSG definition
+points_sfc_wgs <- st_sfc(point1, point2, crs=4326)
+st_crs(points_sfc_wgs)
+
+# PROJ4STRING definition
+st_sfc(point1, point2, crs="+proj=longlat +datum=WGS84 +no_defs")
+
+# THE SF CLASS
+lnd_point = st_point(c(0.1, 51.5))                 # sfg object
+lnd_geom = st_sfc(lnd_point, crs = 4326)           # sfc object
+lnd_attrib = data.frame(                           # data.frame object
+  name = "London",
+  temperature = 25,
+  date = as.Date("2017-06-21")
+)
+lnd_sf = st_sf(lnd_attrib, geometry = lnd_geom)    # sf object
+
