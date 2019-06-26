@@ -133,3 +133,7 @@ lnd_attrib = data.frame(                           # data.frame object
 )
 lnd_sf = st_sf(lnd_attrib, geometry = lnd_geom)    # sf object
 
+lnd_sf
+class(lnd_sf)
+
+# EXPLORE RASTER DATA --------------------
