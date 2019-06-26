@@ -18,13 +18,13 @@ summary(world["lifeExp"])
 world_mini <- world[1:2, 1:3]
 world_mini
 
-# Why simple features?
+# WHY SIMPLE FEATURES?
 # Conversion of objects between sf and sp packages
 library(sp)
 world_sp <- as(world, Class="Spatial")
 world_sf <- st_as_sf(world_sp)
 
-# Basic mapmaking
+# BASIC MAPMAKING
 spplot(world_sp)  # plotting with sp package 
 plot(world_sf)    # plotting with sf package
 plot(world[3:6])
@@ -35,7 +35,7 @@ asia <- st_union(world_asia)
 plot(world["pop"], reset=FALSE)
 plot(asia, add=TRUE, col="red")
 
-# Base plot arguments
+# BASE PLOT ARGUMENTS
 plot(world["continent"], reset=FALSE)
 cex = sqrt(world$pop) / 10000
 world_cents <- st_centroid(world, of_largest=TRUE)
@@ -45,8 +45,7 @@ india <- world[world$name_long == "India", ]
 plot(st_geometry(india), expandBB = c(0, 0.2, 0.1, 1), col = "gray", lwd = 3)
 plot(world_asia[0], add = TRUE)
 
-# Simple feature geometries
-
+# SIMPLE FEATURE GEOMETRIES
 ## points
 st_point(c(5, 2))                 # XY point
 st_point(c(5, 2, 3))              # XYZ point
@@ -85,3 +84,11 @@ st_multipolygon(multipolygon_list)
 ## geometrycollection
 gemetrycollection_list <- list(st_multipoint(multipoint_matrix),st_linestring(linestring_matrix))
 st_geometrycollection(gemetrycollection_list)
+
+# SIMPLE FEATURE COLUMNS
+# sfc point
+point1 <- st_point(c(5, 2))
+point2 <- st_point(c(1, 3))
+points_sfc <- st_sfc(point1, point2)
+points_sfc
+
