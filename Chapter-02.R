@@ -92,3 +92,24 @@ point2 <- st_point(c(1, 3))
 points_sfc <- st_sfc(point1, point2)
 points_sfc
 
+# sfc polygon
+polygon_list1 <- list(rbind(c(1, 5), c(2, 2), c(4, 1), c(4, 4), c(1, 5)))
+polygon1 <- st_polygon(polygon_list1)
+polygon_list2 <- list(rbind(c(0, 2), c(1, 2), c(1, 3), c(0, 3), c(0, 2)))
+polygon2 <- st_polygon(polygon_list2)
+polygon_sfc <- st_sfc(polygon1, polygon2)
+st_geometry_type(polygon_sfc)
+
+# sfc multilinestring
+multilinestring_list1 <- list(rbind(c(1, 5), c(4, 4), c(4, 1), c(2, 2), c(3, 2)), 
+                             rbind(c(1, 2), c(2, 4)))
+multilinestring1 <- st_multilinestring((multilinestring_list1))
+multilinestring_list2 <- list(rbind(c(2, 9), c(7, 9), c(5, 6), c(4, 7), c(2, 7)), 
+                             rbind(c(1, 7), c(3, 8)))
+multilinestring2 <- st_multilinestring((multilinestring_list2))
+multilinestring_sfc <- st_sfc(multilinestring1, multilinestring2)
+st_geometry_type(multilinestring_sfc)
+
+# sfc geometry
+point_multilinestring_sfc <- st_sfc(point1, multilinestring1)
+st_geometry_type(point_multilinestring_sfc)
