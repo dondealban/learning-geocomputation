@@ -45,3 +45,43 @@ india <- world[world$name_long == "India", ]
 plot(st_geometry(india), expandBB = c(0, 0.2, 0.1, 1), col = "gray", lwd = 3)
 plot(world_asia[0], add = TRUE)
 
+# Simple feature geometries
+
+## points
+st_point(c(5, 2))                 # XY point
+st_point(c(5, 2, 3))              # XYZ point
+st_point(c(5, 2, 1), dim="XYM")   # XYM point
+st_point(c(5, 2, 3, 1))           # XYZM point
+
+# the rbind function simplifies the creation of matrices
+## multipoint
+multipoint_matrix <- rbind(c(5, 2), c(1, 3), c(3, 4), c(3, 2))
+st_multipoint(multipoint_matrix)
+
+## linestring
+linestring_matrix <- rbind(c(1, 5), c(4, 4), c(4, 1), c(2, 2), c(3, 2))
+st_linestring(linestring_matrix)
+
+## polygon
+polygon_list <- list(rbind(c(1, 5), c(2, 2), c(4, 1), c(4, 4), c(1, 5)))
+st_polygon(polygon_list)
+
+## polygon with a hole
+polygon_border <- rbind(c(1, 5), c(2, 2), c(4, 1), c(4, 4), c(1, 5))
+polygon_hole <- rbind(c(2, 4), c(3, 4), c(3, 3), c(2, 3), c(2, 4))
+polygon_with_hole_list <- list(polygon_border, polygon_hole)
+st_polygon(polygon_with_hole_list)
+
+## multilinestring
+multilinestring_list <- list(rbind(c(1, 5), c(4, 4), c(4, 1), c(2, 2), c(3, 2)), 
+                            rbind(c(1, 2), c(2, 4)))
+st_multilinestring((multilinestring_list))
+
+## multipolygon
+multipolygon_list <- list(list(rbind(c(1, 5), c(2, 2), c(4, 1), c(4, 4), c(1, 5))),
+                         list(rbind(c(0, 2), c(1, 2), c(1, 3), c(0, 3), c(0, 2))))
+st_multipolygon(multipolygon_list)
+
+## geometrycollection
+gemetrycollection_list <- list(st_multipoint(multipoint_matrix),st_linestring(linestring_matrix))
+st_geometrycollection(gemetrycollection_list)
